@@ -3,7 +3,7 @@
 Note:
 This is a fork of https://github.com/jefftranter/udis. This fork contains the
 following updates:
-- Support for blocks of memory/rom data which isn't executabele code, like strings, tables etc
+- Support for blocks of memory/rom data which isn't executable code, like strings, tables etc
 - Support for Windows OS
 - Starting address may be given as a hexadecimal address
 - Checked with pylint tooling
