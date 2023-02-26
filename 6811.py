@@ -12,6 +12,8 @@
 # 1. Some instructions use the same opcode (e.g. bcs and blo).
 #    Disassembly will use whatever is listed last in this table.
 # 2. brset/brclr instructions do not yet output correct branch address.
+if dir().count("pcr") == 0:
+    pcr = 1
 
 # Maximum length of an instruction (for formatting purposes)
 maxLength = 5

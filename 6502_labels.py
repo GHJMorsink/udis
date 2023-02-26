@@ -13,26 +13,28 @@ if dir().count("pcr") == 0:
     pcr = 1
 # Maximum length of an instruction (for formatting purposes)
 maxLength = 3
+labels = True
 
 # Leadin bytes for multibyte instructions
 leadInBytes = []
 
+
 # Addressing mode table
 # List of addressing modes and corresponding format strings for operands.
 addressModeTable = {
-"implicit"    : "",
-"absolute"    : "${1:02X}{0:02X}",
-"absolutex"   : "${1:02X}{0:02X},x",
-"absolutey"   : "${1:02X}{0:02X},y",
-"accumulator" : "a",
-"immediate"   : "#${0:02X}",
-"indirectx"   : "(${0:02X},x)",
-"indirecty"   : "(${0:02X}),y",
-"indirect"    : "(${1:02X}{0:02X})",
-"relative"    : "${0:04X}",
-"zeropage"    : "${0:02X}",
-"zeropagex"   : "${0:02X},x",
-"zeropagey"   : "${0:02X},y",
+"implicit"    : [""],
+"absolute"    : ["${1:02X}{0:02X}", "{0:s}"],
+"absolutex"   : ["${1:02X}{0:02X},x", "{0:s},x"],
+"absolutey"   : ["${1:02X}{0:02X},y", "{0:s},y"],
+"accumulator" : ["a"],
+"immediate"   : ["#${0:02X}"],
+"indirectx"   : ["(${0:02X},x)"],
+"indirecty"   : ["(${0:02X}),y"],
+"indirect"    : ["(${1:02X}{0:02X})", "({0:s})"],
+"relative"    : ["${0:04X}", "{0:s}"],
+"zeropage"    : ["${0:02X}"],
+"zeropagex"   : ["${0:02X},x"],
+"zeropagey"   : ["${0:02X},y"],
 }
 
 # Op Code Table

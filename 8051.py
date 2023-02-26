@@ -7,6 +7,9 @@
 # DataWidth = 8  # 8-bit data
 # AddressWidth = 16  # 16-bit addresses
 
+if dir().count("pcr") == 0:
+    pcr = 1
+
 # Maximum length of an instruction (for formatting purposes)
 maxLength = 3
 

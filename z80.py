@@ -6,6 +6,10 @@
 # Description = "Zilog 8-bit microprocessor."
 # DataWidth = 8  # 8-bit data
 # AddressWidth = 16  # 16-bit addresses
+if dir().count("pcr") == 0:
+    pcr = 1
+if dir().count("z80bit") == 0:
+    z80bit = 1
 
 # Maximum length of an instruction (for formatting purposes)
 maxLength = 4
