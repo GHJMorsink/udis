@@ -17,36 +17,22 @@ for more details.
 
 The following CPUs are either supported or planned to be supported:
 
-CPU    Status
----    ------
-
-6502    done
-
-65816   done
-
-65C02   done
-
-6800    done
-
-6801/6803    done
-
-6809    done (incomplete)
-
-6811    done
-
-8080    done
-
-8085    done
-
-8051    done (incomplete)
-
-Z80     done
-
-F8      possible
-
-1802    done
-
-TMS9900 possible
+| CPU     | Status  |
+|---------|---------|
+| 6502    | done |
+| 65816   | done |
+| 65C02   | done |
+| 6800    | done |
+| 6801/6803 | done |
+| 6809    | done (incomplete) |
+| 6811    | done |
+| 8080    | done |
+| 8085    | done |
+| 8051    | done (incomplete) |
+| Z80     | done |
+| F8      | possible |
+| 1802    | done |
+| TMS9900 | possible |
 
 
 usage:
@@ -82,8 +68,8 @@ optional arguments:
 Support for labels:
 Use of the processor file '6502_labels.py' (use in the command line "-c 6502_labels") will give some support for labels. 
 The location/value of labels should be defined in a file named equal to the binary file but with extension '.lbl'. It
-must be a plain ascii text file containing the label name followed ba a comma and the hexadecimal value
-of the label. On the code address of the label an extra line in the result is ginen with the label followed by a colon. Futher 
+must be a plain ascii text file containing the label name followed by a comma and the hexadecimal value
+of the label. On the code address of the label an extra line in the result is given with the label followed by a colon. Futher 
 all mnenomics using the labeladdress is replaced with the mnenomic using the label name.
 
 In the examples map you will find an example for the ROMs as contained in the Acorn Atom.
