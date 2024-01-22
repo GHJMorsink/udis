@@ -28,6 +28,8 @@ CPU    Status
 
 6800    done
 
+6801/6803    done
+
 6809    done (incomplete)
 
 6811    done

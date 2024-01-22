@@ -45,7 +45,7 @@ def isprint(char):
 if not WINDOWS:
     #pylint: disable=undefined variable
     import signal
-    signal.signal(signal.SIGPIPE, signal.SIG_DFL)   
+    signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 
 # Parse command line options
@@ -63,12 +63,12 @@ args = parser.parse_args()
 # Looks for plugin in same directory as this program.
 plugindir = os.path.dirname(os.path.realpath(__file__))
 plugin = plugindir + os.sep + args.cpu + ".py"
-  
+
 try:
     exec(open(plugin).read())
 except FileNotFoundError:
     print(("error: CPU plugin file '{}' not found.".format(plugin)), file=sys.stderr)
-    print("The following CPUs are supported: 1802 6502 65816 65c02 6800 6809 6811 8051 8080 8085 z80")
+    print("The following CPUs are supported: 1802 6502 65816 65c02 6800 6801/6803 6809 6811 8051 8080 8085 z80")
     sys.exit(1)
 
 # Get filename from command line arguments.
@@ -92,7 +92,7 @@ if args.block != "":
 
 if labels:
     label.readLabels(filename, labellist)
-  
+
 
 # Current instruction address. Silently force it to be in valid range.
 if args.address.startswith("0x"):
@@ -135,7 +135,7 @@ while True:
     try:
         b = c = 1
         label.checkPCAddress(address, labellist)      # Note: if there are no labels this will do nothing
-        
+
         for block in blocks:
             if address >= block[0] and address <= block[1]:
                 if block[2] == 'a':
@@ -149,8 +149,8 @@ while True:
                         if isprint(chr(bvalue)):
                             sp = chr(bvalue)
                         else:
-                            sp = "${0:02X}".format(bvalue)   
-                        line += "   .ascii   {0:s}".format(sp)  
+                            sp = "${0:02X}".format(bvalue)
+                        line += "   .ascii   {0:s}".format(sp)
                         print(line)
                         address = (address + 1) & 0xffff
                         line = ""
@@ -163,12 +163,12 @@ while True:
                         bvalue = ord(b)
                         if args.nolist is False:
                             line += "{0:04X}  {1:02X}{2:s}".format(address, bvalue, s[0:(maxLength-1)*3+1])
-                        line += "   .byte    ${0:02X}".format(bvalue)  
+                        line += "   .byte    ${0:02X}".format(bvalue)
                         print(line)
                         address = (address + 1) & 0xffff
                         line = ""
                         label.checkPCAddress(address, labellist)
-                                          
+
                 if block[2] == 'W':
                     while address <= block[1]:
                         b = f.read(1)  # Get binary byte from file
@@ -178,12 +178,12 @@ while True:
                         wvalue = ord(c) + 256*ord(b)
                         if args.nolist is False:
                             line += "{0:04X}  {1:02X} {2:02X}{3:s}".format(address, ord(b), ord(c), s[0:(maxLength-2)*3+1])
-                        line += "   .dw      ${0:04X}".format(wvalue)  
+                        line += "   .dw      ${0:04X}".format(wvalue)
                         print(line)
                         address = (address + 2) & 0xffff
                         line = ""
                         label.checkPCAddress(address, labellist)
-                    
+
                 if block[2] == 'w':
                     while address <= block[1]:
                         b = f.read(1)  # Get binary byte from file
@@ -193,13 +193,13 @@ while True:
                         wvalue = ord(b) + 256*ord(c)
                         if args.nolist is False:
                             line += "{0:04X}  {1:02X} {2:02X}{3:s}".format(address, ord(b), ord(c), s[0:(maxLength-2)*3+1])
-                        line += "   .word    ${0:04X}".format(wvalue)  
+                        line += "   .word    ${0:04X}".format(wvalue)
                         print(line)
                         address += 2
                         line = ""
                         address &= 0xffff
                         label.checkPCAddress(address, labellist)
-                    
+
                 if block[2] == 's':
                     strvalue = ''
                     length = 0
@@ -218,7 +218,7 @@ while True:
                         else:
                             strvalue += '\\x{0:02x}'.format(b)
                         if not args.nolist and length <= maxLength:
-                            line += "{0:02X} ".format(b) 
+                            line += "{0:02X} ".format(b)
                     if args.nolist is False and length < maxLength:
                         for i in range(maxLength):
                             if i >= length:
@@ -230,10 +230,10 @@ while True:
                     label.checkPCAddress(address, labellist)
                     if not b:
                         break
-        
+
         if not b or not c:
             break           # unexpected EOF
-               
+
         b = f.read(1)  # Get binary byte from file
 
         if not b:  # handle EOF
